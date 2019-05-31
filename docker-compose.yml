@@ -1,0 +1,32 @@
+version: '2.1'
+
+services:
+  mongodb:
+    image: mongo
+    ports:
+      - "27018:27018"
+    restart: always
+    healthcheck:
+      test: "exit 0"
+    networks:
+      - my-network
+    
+  productsmicro:
+    build: .
+    links:
+      - 'mongodb'
+    depends_on: 
+      mongodb:
+        condition: service_healthy
+    environment:
+      - WAIT_HOSTS=mongodb:27018
+    entrypoint:
+      - /usr/local/bin/docker-entrypoint.sh
+    ports:
+      - "3000:3000"
+    networks:
+      - my-network
+    
+networks:
+  my-network:
+    name: net
