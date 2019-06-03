@@ -1,4 +1,4 @@
-var express = require('express');
+var express = require('../node_modules/express');
 var router = express.Router();
 
 var Product = require('../models/Product');
@@ -39,11 +39,12 @@ router.get('/store/:storeId', function(req,res,next){
 });
 
 router.post('/', function(req, res, next){
-    const {name, description, quantity, cost, storeId, type} = req.body;
+    const {name, description, quantity, image, cost, storeId, type} = req.body;
     const product = new Product({
         name,
         description,
         type,
+        image,
         quantity,
         storeId,
         cost
@@ -68,7 +69,7 @@ router.delete('/:id', function(req,res,next){
 router.patch('/:id', function(req,res,next){
     Product.updateOne({_id: req.params.id}, req.body)
     .exec(function(err, product){
-        res.send(product);
+        res.send(req.body);
     })
 });
 

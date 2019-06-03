@@ -10,6 +10,8 @@ services:
       test: "exit 0"
     networks:
       - my-network
+    volumes:
+      - mongodata:/data/db
     
   productsmicro:
     build: .
@@ -30,3 +32,6 @@ services:
 networks:
   my-network:
     name: net
+
+volumes:
+  mongodata:
