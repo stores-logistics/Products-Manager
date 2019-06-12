@@ -28,7 +28,7 @@ RUN cp docker-entrypoint.sh /usr/local/bin/ && \
 RUN dos2unix /usr/local/bin//docker-entrypoint.sh && apt-get --purge remove -y dos2unix && rm -rf /var/lib/apt/lists/*
 
 # Expose the port
-EXPOSE 3000
+EXPOSE 4006
 
 ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
 
